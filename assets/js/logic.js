@@ -1,16 +1,35 @@
-// TODO: Create logic to toggle the light/dark mode styles for the page and circle. The mode should be saved to local storage.
+function toggleLightDarkMode() {
+  const currentMode = localStorage.getItem('mode') || 'light';
 
+  const newMode = currentMode === 'light' ? 'dark' : 'light';
+  const emoji = newMode === 'light' ? '🌙' : '🌞';
 
-// TODO: Create a function called `readLocalStorage` that reads from local storage and returns the data. If no data exists, return an empty array.
+  document.body.className = newMode;
 
+  localStorage.setItem('mode', newMode);
+}
 
-// TODO: Create a function called `storeLocalStorage` that takes a given object and saves the new data to the existing blog data in local storage.
+(function setInitialMode() {
+  const savedMode = localStorage.getItem('mode') || 'light';
+  document.body.className = savedMode;
+})();
 
+document.getElementById('toggle').addEventListener('click', toggleLightDarkMode);
 
-// ! Use the following function whenever you need to redirect to a different page
+function readLocalStorage() {
+  const blogData = JSON.parse(localStorage.getItem('blogPosts')) || [];
+  return blogData;
+}
+
+function storeLocalStorage(newPost) {
+  const existingPosts = readLocalStorage();
+
+  existingPosts.push(newPost);
+
+  localStorage.setItem('blogPosts', JSON.stringify(existingPosts));
+}
 
 let redirectURL = '';
-
 const redirectPage = function (url) {
   redirectURL = url;
   location.assign(url);
