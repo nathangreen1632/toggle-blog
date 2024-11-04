@@ -1,11 +1,42 @@
-// TODO: Create a variable that selects the main element, and a variable that selects the back button element
 
-// TODO: Create a function that builds an element and appends it to the DOM
+const mainElement = document.getElementById('blogPosts');
+const backButton = document.getElementById('back');
 
-// TODO: Create a function that handles the case where there are no blog posts to display
+function createBlogPostElement(post) {
 
-// TODO: Create a function called `renderBlogList` that renders the list of blog posts if they exist. If not, call the no posts function.
+  const postContainer = document.createElement('div');
+  const titleElement = document.createElement('h3');
+  const contentElement = document.createElement('p');
+  const authorElement = document.createElement('small');
+  const timeElement = document.createElement('small');
 
-// TODO: Call the `renderBlogList` function
+  titleElement.textContent = post.title;
+  contentElement.textContent = post.content;
+  authorElement.textContent = `By: ${post.username}`;
 
-// TODO: Redirect to the home page using the `redirectPage` function found in logic.js when the back button is clicked
+  postContainer.appendChild(titleElement);
+  postContainer.appendChild(contentElement);
+  postContainer.appendChild(authorElement);
+  mainElement.appendChild(postContainer);
+}
+
+function displayNoPostsMessage() {
+  document.getElementById('noPostsMessage').style.display = 'block';
+}
+
+function renderBlogList() {
+  const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+
+  if (blogPosts.length === 0) {
+    displayNoPostsMessage();
+  } else {
+    document.getElementById('noPostsMessage').style.display = 'none';
+    blogPosts.forEach(createBlogPostElement);
+  }
+}
+
+backButton.addEventListener('click', () => {
+  redirectPage('index.html');
+});
+
+renderBlogList();
