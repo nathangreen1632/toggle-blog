@@ -1,4 +1,3 @@
-
 const mainElement = document.getElementById('blogPosts');
 const backButton = document.getElementById('back');
 
@@ -8,7 +7,6 @@ function createBlogPostElement(post) {
   const titleElement = document.createElement('h3');
   const contentElement = document.createElement('p');
   const authorElement = document.createElement('small');
-  const timeElement = document.createElement('small');
 
   titleElement.textContent = post.title;
   contentElement.textContent = post.content;
@@ -17,6 +15,7 @@ function createBlogPostElement(post) {
   postContainer.appendChild(titleElement);
   postContainer.appendChild(contentElement);
   postContainer.appendChild(authorElement);
+
   mainElement.appendChild(postContainer);
 }
 
@@ -25,6 +24,7 @@ function displayNoPostsMessage() {
 }
 
 function renderBlogList() {
+
   const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
 
   if (blogPosts.length === 0) {
