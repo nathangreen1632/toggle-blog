@@ -13,8 +13,6 @@ function handleFormSubmission(event) {
     return;
   }
 
-  const currentDateTime = new Date().toLocaleString();
-
   const newPost = {
     username: username,
     title: title,
@@ -22,7 +20,6 @@ function handleFormSubmission(event) {
   };
 
   storeLocalStorage(newPost);
-
   redirectPage('blog.html');
 }
 

@@ -17,7 +17,7 @@ article {
   position: relative;
 }
 
-article blockquote {
+article > blockquote {
   margin: 1rem;
   margin-bottom: 2rem;
   font-style: italic;
