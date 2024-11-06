@@ -1,8 +1,7 @@
 const mainElement = document.getElementById('blogPosts');
-const backButton = document.getElementById('back');
+const noPostsMessage = document.getElementById('noPostsMessage');
 
 function createBlogPostElement(post) {
-
   const postContainer = document.createElement('div');
   const titleElement = document.createElement('h3');
   const contentElement = document.createElement('p');
@@ -19,23 +18,18 @@ function createBlogPostElement(post) {
   mainElement.appendChild(postContainer);
 }
 
-function displayNoPostsMessage() {
-  document.getElementById('noPostsMessage').style.display = 'block';
-}
-
 function renderBlogList() {
-
-  const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+  const blogPosts = readLocalStorage();
 
   if (blogPosts.length === 0) {
-    displayNoPostsMessage();
+    noPostsMessage.style.display = 'block';
   } else {
-    document.getElementById('noPostsMessage').style.display = 'none';
+    noPostsMessage.style.display = 'none';
     blogPosts.forEach(createBlogPostElement);
   }
 }
 
-backButton.addEventListener('click', () => {
+document.getElementById('back').addEventListener('click', () => {
   redirectPage('index.html');
 });
 
